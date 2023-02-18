@@ -46,14 +46,17 @@ func (m *BlogModels) CreateBlog(blog *forms.Blog) error {
 
 func (m *BlogModels) GetAllBlogs() ([]*forms.GetAllBlogsResponse, error) {
 	rows, err := m.db.Query(
-		`SELECT b.id, 
-				b.title, 
-				b.SUBSTRING(content FROM 0 FOR 350)), 
-				b.created_at, 
-				b.updated_at,
-				COUNT(c.id) AS comments
+		`SELECT 
+			b.id, 
+			b.title, 
+			SUBSTRING(b.content FROM 0 FOR 350),
+			b.created_at, 
+			b.updated_at,
+			COUNT(c.id) AS comments
 		FROM blogs AS b
-		JOIN comments AS c ON p.id = c.blog_id`,
+		LEFT JOIN comments AS c ON b.id = c.blog_id
+		GROUP BY b.id
+		ORDER BY b.created_at DESC`,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get all blogs: %v", err)
@@ -81,13 +84,13 @@ func (m *BlogModels) GetAllBlogs() ([]*forms.GetAllBlogsResponse, error) {
 }
 
 func (m *BlogModels) GetBlog(id int) (*forms.GetBlogResponse, error) {
-	var blog *forms.GetBlogResponse
+	blog := &forms.GetBlogResponse{}
 	if err := m.db.QueryRow(
 		`SELECT id,
 				title,
 				content,
 				created_at,
-				updated_at,
+				updated_at
 		FROM blogs WHERE id = $1`,
 		id,
 	).Scan(
@@ -103,11 +106,11 @@ func (m *BlogModels) GetBlog(id int) (*forms.GetBlogResponse, error) {
 	// Get the comments for the blog
 	rows, err := m.db.Query(
 		`SELECT id,
-				post_id,
+				blog_id,
 				content,
 				created_at,
 				updated_at
-		FROM comments WHERE post_id = $1`,
+		FROM comments WHERE blog_id = $1`,
 		id,
 	)
 	if err != nil {
