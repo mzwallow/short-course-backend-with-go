@@ -12,6 +12,6 @@ $ docker run --name blog-postgres -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pas
 
 ## Install PostgreSQL driver
 ```
-$ go get github.com/jackc/pgx
-$ go get github.com/jackc/pgx/stdlib
+$ go get github.com/jackc/pgx/v5
+$ go get github.com/jackc/pgx/v5/stdlib
 ```
