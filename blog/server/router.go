@@ -9,12 +9,14 @@ import (
 
 func NewRouter(blogCtrls *controllers.BlogControllers) *gin.Engine {
 	r := gin.Default()
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000"}
-	config.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type"}
-	config.AllowCredentials = true
-	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"}
-	r.Use(cors.New(config))
+	c := cors.Config{
+		AllowOrigins:     []string{"*", "http://localhost:3000"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "Authorization", "Accept", "X-Requested-With", "Access-Control-Allow-Origin"},
+		AllowCredentials: true,
+		ExposeHeaders:    []string{"Content-Length"},
+	}
+	r.Use(cors.New(c))
 
 	r.GET("/health", blogCtrls.Health)
 
