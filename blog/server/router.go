@@ -3,11 +3,13 @@ package server
 import (
 	"blog/controllers"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func NewRouter(blogCtrls *controllers.BlogControllers) *gin.Engine {
 	r := gin.Default()
+	r.Use(cors.Default())
 
 	r.GET("/health", blogCtrls.Health)
 

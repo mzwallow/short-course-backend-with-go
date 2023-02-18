@@ -3,6 +3,7 @@ module blog
 go 1.20
 
 require (
+	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.8.2
 	github.com/jackc/pgx/v5 v5.3.0
 	github.com/spf13/viper v1.15.0
