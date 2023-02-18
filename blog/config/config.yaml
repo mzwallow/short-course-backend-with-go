@@ -1,0 +1,11 @@
+# Sever
+server:
+  port: 8080
+
+# Database
+database:
+  host: localhost
+  port: 5432
+  user: user
+  password: password
+  dbname: blog
