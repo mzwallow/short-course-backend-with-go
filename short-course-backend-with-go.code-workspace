@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "basic-go"
+		},
+		{
+			"path": "go-postgres"
+		},
+		{
+			"path": "web-server"
+		},
+		{
+			"path": "blog"
+		}
+	],
+	"settings": {}
+}
