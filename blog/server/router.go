@@ -10,11 +10,10 @@ import (
 func NewRouter(blogCtrls *controllers.BlogControllers) *gin.Engine {
 	r := gin.Default()
 	c := cors.Config{
-		AllowOrigins:     []string{"*", "http://localhost:3000"},
+		AllowOrigins:     []string{"http://localhost:3000"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "Authorization", "Accept", "X-Requested-With", "Access-Control-Allow-Origin"},
 		AllowCredentials: true,
-		ExposeHeaders:    []string{"Content-Length"},
 	}
 	r.Use(cors.New(c))
 
