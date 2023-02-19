@@ -2,14 +2,17 @@ package main
 
 import (
 	"blog/config"
-	"fmt"
+	"blog/server"
 )
 
 func main() {
 	cfg := config.Load()
 	port := cfg.ServerPort()
-	dburl := cfg.LoadDBUrl()
+	// dburl := cfg.LoadDBUrl()
 
-	fmt.Printf("port: %v\n", port)
-	fmt.Printf("dburl: %v\n", dburl)
+	// db := database.NewDatabase()
+
+	r := server.NewRouter()
+	srv := server.NewServer(r, port)
+	srv.Run()
 }
