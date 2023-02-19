@@ -14,6 +14,10 @@ func NewRouter(blogCtrls *controllers.BlogControllers) *gin.Engine {
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "Authorization", "Accept", "X-Requested-With", "Access-Control-Allow-Origin"},
 		AllowCredentials: true,
+		AllowOriginFunc: func(origin string) bool {
+			return true
+		},
+		ExposeHeaders: []string{"Content-Length", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type", "Authorization", "Accept", "X-Requested-With", "Access-Control-Allow-Methods", "Access-Control-Allow-Credentials", "Access-Control-Expose-Headers"},
 	}
 	r.Use(cors.New(c))
 
