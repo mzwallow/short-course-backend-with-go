@@ -52,7 +52,7 @@ func (m *BlogModels) GetAllBlogs() ([]*forms.GetAllBlogsResponse, error) {
 			SUBSTRING(b.content FROM 0 FOR 350),
 			b.created_at, 
 			b.updated_at,
-			COUNT(c.id) AS comments
+			COALESCE(COUNT(c.id), 0) AS comments
 		FROM blogs AS b
 		LEFT JOIN comments AS c ON b.id = c.blog_id
 		GROUP BY b.id
