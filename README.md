@@ -15,3 +15,13 @@ $ docker run --name blog-postgres -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pas
 $ go get github.com/jackc/pgx
 $ go get github.com/jackc/pgx/stdlib
 ```
+
+## CS Infinite github
+```
+https://github.com/CS-Infinite
+```
+
+### Web
+```
+https://github.com/CS-Infinite/nextjs-short-courte-template
+```
